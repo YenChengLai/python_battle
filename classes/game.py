@@ -99,7 +99,32 @@ class Person:
         while len(mp_bar) < 10:
             mp_bar += " "
 
+        hp_string = str(self.hp) + "/" + str(self.max_hp)
+        current_hp = ""
+
+        if len(hp_string) < 9:
+            decreased = 9 - len(hp_string)
+            while decreased > 0:
+                current_hp += " "
+                decreased -= 1
+
+            current_hp += hp_string
+        else:
+            current_hp = hp_string
+
+        mp_string = str(self.mp) + "/" + str(self.max_mp)
+        current_mp = ""
+        if len(mp_string) < 7:
+            decreased = 7 - len(mp_string)
+            while decreased > 0:
+                current_mp += " "
+                decreased -= 1
+
+            current_mp += mp_string
+        else:
+            current_mp = mp_string
+
         print("                       __________________________            ___________ ")
-        print(bColor.BOLD + self.name + "           " + str(self.hp) + "/" + str(self.max_hp) + "|"
+        print(bColor.BOLD + self.name + "           " + current_hp + "|"
               + bColor.OKGREEN + hp_bar + bColor.ENDC
-              + "|     " + str(self.mp) + "/" + str(self.max_mp) + " |" + bColor.OKBLUE + mp_bar + bColor.ENDC + "|")
+              + "|     " + current_mp + " |" + bColor.OKBLUE + mp_bar + bColor.ENDC + "|")
