@@ -43,7 +43,7 @@ print("\n" + bColor.FAIL + bColor.BOLD + "AN ENEMY ATTACKS!" + bColor.ENDC)
 while (running):
     print("====================================")
     print("\n\n")
-    print("NAME            HP                                    MP")
+    print("NAME            HP                                     MP")
     for player in players:
         player.get_stats()
 
@@ -109,7 +109,7 @@ while (running):
     enemy_choice = 1
 
     enemy_dmg = enemy.generate_damage()
-    player.take_damage(enemy_dmg)
+    player1.take_damage(enemy_dmg)
     print("Enemy attacks for", enemy_dmg)
 
     print("--------------------------------")
