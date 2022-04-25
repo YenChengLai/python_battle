@@ -27,6 +27,11 @@ class Person:
     def generate_damage(self):
         return random.randrange(self.atk_l, self.atk_h)
 
+    def heal(self, dmg):
+        self.hp += dmg
+        if self.hp > self.max_hp:
+            self.hp = self.max_hp
+
     def take_damage(self, dmg):
         self.hp -= dmg
         if self.hp < 0:
@@ -50,13 +55,14 @@ class Person:
 
     def choose_action(self):
         i = 1
-        print("Action")
+        print(bColor.OKBLUE + "Actions" + bColor.ENDC)
         for item in self.actions:
             print(str(i) + ":", item)
             i += 1
 
     def choose_magic(self):
         i = 1
+        print(bColor.OKBLUE + "Magics" + bColor.ENDC)
         for spell in self.magic:
             print(str(i) + ":", spell.name, "(cost:", str(spell.cost) + ")")
             i += 1
