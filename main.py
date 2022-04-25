@@ -1,3 +1,5 @@
+import random
+
 from classes.game import Person, bColor
 from classes.magic import Spell
 from classes.inventory import Item
@@ -49,6 +51,8 @@ while (running):
 
     print("\n")
 
+    enemy.get_enemy_stats()
+
     for player in players:
         player.choose_action()
         choice = input("Choose action:")
@@ -99,6 +103,12 @@ while (running):
                 player.heal(item.prop)
                 print(bColor.OKGREEN + "\n" + item.name + " heals for", str(item.prop), "HP" + bColor.ENDC)
             elif item.type == "elixer":
+
+                if item.name == "MegaElixer":
+                    for i in players:
+                        i.hp = i.max_hp
+                        i.mp = i.max_mp
+
                 player.hp = player.max_hp
                 player.mp = player.max_mp
                 print(bColor.OKGREEN + "\n" + item.name + " fully restores HP/MP" + bColor.ENDC)
@@ -107,15 +117,11 @@ while (running):
                 print(bColor.FAIL + "\n" + item.name + "deals", str(item.prop), "points of damage" + bColor.ENDC)
 
     enemy_choice = 1
+    target = random.randrange(0, 3)
 
     enemy_dmg = enemy.generate_damage()
-    player1.take_damage(enemy_dmg)
+    players[target].take_damage(enemy_dmg)
     print("Enemy attacks for", enemy_dmg)
-
-    print("--------------------------------")
-    print("Enemy HP:", bColor.FAIL + str(enemy.get_hp()) + "/" + str(enemy.get_max_hp()) + bColor.ENDC + "\n")
-    print("Your HP:", bColor.OKGREEN + str(player.get_hp()) + "/" + str(player.get_max_hp()) + bColor.ENDC)
-    print("Your MP:", bColor.OKBLUE + str(player.get_mp()) + "/" + str(player.get_max_mp()) + bColor.ENDC + "\n")
 
     if enemy.get_hp() == 0:
         print(bColor.OKGREEN + "You win!" + bColor.ENDC)
